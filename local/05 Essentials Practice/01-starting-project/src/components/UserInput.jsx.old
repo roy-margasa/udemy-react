@@ -1,0 +1,68 @@
+import { useState } from 'react';
+import Input from './Input.jsx';
+
+export default function UserInput({ onChangeValue }) {
+  const [initialInvestment, setInitialInvestment] = useState(0);
+  const [annualInvestment, setAnnualInvestment] = useState(0);
+  const [expectedReturn, setExpectedReturn] = useState(0);
+  const [duration, setDuration] = useState(1);
+
+  const currentValues = {
+    initialInvestment,
+    annualInvestment,
+    expectedReturn,
+    duration,
+  };
+
+  function handleChangeValue(event, type) {
+    const value = Number(event.target.value);
+    const nextValues = { ...currentValues, [type]: value };
+
+    if (type === 'initialInvestment') {
+      setInitialInvestment(value);
+    }
+
+    if (type === 'annualInvestment') {
+      setAnnualInvestment(value);
+    }
+
+    if (type === 'expectedReturn') {
+      setExpectedReturn(value);
+    }
+
+    if (type === 'duration') {
+      setDuration(value);
+    }
+
+    onChangeValue(nextValues);
+  }
+
+  return (
+    <div id="user-input">
+      <div className="input-group">
+        <Input
+          label="Initial Investment"
+          value={initialInvestment}
+          handleChangeValue={() =>
+            handleChangeValue(event, 'initialInvestment')
+          }
+        />
+        <Input
+          label="Annual Investment"
+          value={annualInvestment}
+          handleChangeValue={() => handleChangeValue(event, 'annualInvestment')}
+        />
+        <Input
+          label="Expected Return"
+          value={expectedReturn}
+          handleChangeValue={() => handleChangeValue(event, 'expectedReturn')}
+        />
+        <Input
+          label="Duration"
+          value={duration}
+          handleChangeValue={() => handleChangeValue(event, 'duration')}
+        />
+      </div>
+    </div>
+  );
+}
