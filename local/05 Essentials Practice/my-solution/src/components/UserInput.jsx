@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import Input from './Input.jsx';
 
 export default function UserInput({ investmentValues, onChangeValue }) {
